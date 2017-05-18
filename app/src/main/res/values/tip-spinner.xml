@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tipSpinner">Tip amount:</string>
+    <string-array name="tipArray">
+        <item>0%</item>
+        <item>5%</item>
+        <item>10%</item>
+        <item>12%</item>
+        <item>14%</item>
+        <item>16%</item>
+        <item>18%</item>
+        <item>20%</item>
+    </string-array>
+</resources>

@@ -8,10 +8,61 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.uottawa.bond.simpletip.MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tab 2 Home text"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="Simple Tip Calculator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textAlignment="center" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50px" />
+
+            <TextView
+                android:text="Total Amount:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/totalPrompt"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textAlignment="center" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:hint="Enter total here" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50px" />
+
+            <TextView
+                android:text="Select Tip:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tipPrompt"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textAlignment="center" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tipSpinner" />
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
