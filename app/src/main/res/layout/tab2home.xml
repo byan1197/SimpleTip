@@ -10,7 +10,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/totalPrompt"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:layout_weight="1" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -43,9 +47,18 @@
                 android:inputType="numberDecimal"
                 android:ems="10"
                 android:id="@+id/editText"
-                android:singleLine="true"
-                android:textAlignment="center"
-                android:hint="Enter total here" />
+                android:textAlignment="textEnd"
+                android:hint="Enter total"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/numPeople"
+                android:hint="Enter number of people"
+                android:textAlignment="textEnd" />
 
             <Space
                 android:layout_width="match_parent"
@@ -62,7 +75,63 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
                 android:id="@+id/tipSpinner" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50px" />
+
+            <TextView
+                android:text="Tip Suggester:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tipSuggestPrompt"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="How did you like the food?"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/foodRatePrompt"
+                android:textAlignment="center" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/foodBar"
+                android:numStars="5"
+                android:longClickable="true"
+                android:elevation="1dp"
+                android:layout_gravity="center"
+                android:isIndicator="true" />
+
+            <TextView
+                android:text="How did you like the service?"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/serviceRatePrompt"
+                android:textAlignment="center"/>
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/serviceBar"
+                android:numStars="5"
+                android:layout_gravity="center"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50px" />
+
+            <TextView
+                android:text="Swipe right to calculate!"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textAlignment="center" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
