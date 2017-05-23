@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:text="Summary"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:textAppearance="@android:style/TextAppearance.Material.Headline"
+            />
 
         <Space
             android:layout_width="match_parent"
@@ -30,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bill total:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+            android:textAppearance="@android:style/TextAppearance.Material.Button"
+            />
 
         <TextView
             android:id="@+id/billTexttv"
@@ -47,7 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tip"
-            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+            android:textAppearance="@android:style/TextAppearance.Material.Button"
+            />
 
         <TextView
             android:id="@+id/tipText"
@@ -64,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Grand Total:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textAppearance="@android:style/TextAppearance.Material.Button"
             android:textStyle="bold" />
 
         <TextView

@@ -29,6 +29,7 @@ public class Tab2Home extends Fragment {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     EditText numPeopleEdit, billAmount;
+    TextView tipPrompt, servicePrompt;
     Button addPpl, subPpl;
     int numPpl;
     RatingBar serviceRate;
@@ -37,6 +38,7 @@ public class Tab2Home extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        System.out.println("view created");
         View rootView = inflater.inflate(R.layout.tab2home, container, false);
 
         spinner = (Spinner)rootView.findViewById(R.id.tipSpinner);
@@ -45,14 +47,19 @@ public class Tab2Home extends Fragment {
         spinner.setAdapter(adapter);
 
         serviceRate=(RatingBar) rootView.findViewById(R.id.serviceBar);
-
+        tipPrompt = (TextView) rootView.findViewById(R.id.tipSuggestPrompt);
+        servicePrompt = (TextView) rootView.findViewById(R.id.serviceRatePrompt);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
                     serviceRate.setVisibility(View.VISIBLE);
+                    tipPrompt.setVisibility(View.VISIBLE);
+                    servicePrompt.setVisibility(View.VISIBLE);
                 }
                 else{
+                    tipPrompt.setVisibility(View.GONE);
+                    servicePrompt.setVisibility(View.GONE);
                     serviceRate.setVisibility(View.GONE);
                 }
             }
@@ -85,34 +92,52 @@ public class Tab2Home extends Fragment {
             }
         });
 
-
-
         return rootView;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        System.out.println("started");
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        System.out.println("destroyed");
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+        System.out.println("stopped");
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        System.out.println("paused");
     }
 
     public void transferInfo(){
         double bill;
-        billAmount = (EditText) getView().findViewById(R.id.billEditText);
-        if (String.valueOf(billAmount.getText()).isEmpty())
+        if (billAmount==null || String.valueOf(billAmount.getText())=="0")
             bill = 0.00;
         else
             bill = Double.parseDouble(String.valueOf(billAmount.getText()));
         odsl.setData(
                 bill,
-                Integer.parseInt(String.valueOf(spinner.getItemAtPosition(3))),
+                Integer.parseInt(String.valueOf(spinner.getSelectedItem())),
                 Integer.parseInt(String.valueOf(numPeopleEdit.getText())));
-        odsl.test();
         System.out.println("info is transferring.");
     }
 
     public interface OnDataSetListener {
         public void setData(double bill, int tip, int ppl);
-        public void test();
     }
 
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
+        System.out.println("attached");
         try {
             odsl = (OnDataSetListener) context;
         } catch (Exception e){}
