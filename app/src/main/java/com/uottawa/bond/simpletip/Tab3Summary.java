@@ -1,10 +1,12 @@
 package com.uottawa.bond.simpletip;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -13,10 +15,40 @@ import android.widget.TextView;
 
 public class Tab3Summary extends Fragment {
 
+    TextView billTotalTextV, grandTotalTextV, tipTextV;
+
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab3summary, container, false);
+
         return rootView;
     }
+
+    @Override
+    public void onViewCreated (View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        billTotalTextV = (TextView) view.findViewById(R.id.billTexttv);
+        tipTextV = (TextView) view.findViewById(R.id.tipText);
+        grandTotalTextV = (TextView) view.findViewById(R.id.grandText);
+
+        System.out.println(billTotalTextV);
+    }
+
+    public void updateInfo (double bill, int ppl, int tip){
+        double tipAmount = (((double)tip) / 100) * bill;
+        double grandAmount = tipAmount + bill;
+        billTotalTextV.setText(String.format("%.2f", bill));
+        tipTextV.setText(String.format("%.2f", tipAmount));
+        grandTotalTextV.setText(String.format("%.2f", grandAmount));
+    }
+
+    /*public void onStart(){
+        super.onStart();
+        numPpl = 123;
+        billTotal.setText(Integer.toString(numPpl));
+        tip.setText("12345");
+        grandTotal.setText("54321");
+    }*/
 }

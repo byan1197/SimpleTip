@@ -1,5 +1,6 @@
 package com.uottawa.bond.simpletip;
 
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,12 +15,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSetListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,10 +45,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -55,6 +55,42 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         mViewPager.setCurrentItem(1);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == 2){
+                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.getItem(1);
+                    homefrag.transferInfo();
+                    System.out.println(".transferInfo() has been called");
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 3){
+                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.getItem(2);
+                    homefrag.transferInfo();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void setData(double bill, int tip, int ppl) {
+        Tab3Summary summaryfrag = (Tab3Summary) mSectionsPagerAdapter.getItem(2);
+        summaryfrag.updateInfo(bill, tip, ppl);
+
+    }
+    @Override
+    public void test(){
+        System.out.println("THIS SHOULD WORK");
     }
 
 /*
@@ -107,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+
         @Override
         public int getCount() {
             // Show 3 total pages.
@@ -125,5 +162,18 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View view = getCurrentFocus();
+        if (view != null && (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE) && view instanceof EditText && !view.getClass().getName().startsWith("android.webkit.")) {
+            int scrcoords[] = new int[2];
+            view.getLocationOnScreen(scrcoords);
+            float x = ev.getRawX() + view.getLeft() - scrcoords[0];
+            float y = ev.getRawY() + view.getTop() - scrcoords[1];
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom())
+                ((InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this.getWindow().getDecorView().getApplicationWindowToken()), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }
