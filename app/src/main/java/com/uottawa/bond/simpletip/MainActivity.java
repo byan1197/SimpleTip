@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
+
+    Tab1Settings tab1;
+    Tab2Home tab2;
+    Tab3Summary tab3;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 2){
-                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.getItem(1);
+                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
                     homefrag.transferInfo();
                     System.out.println(".transferInfo() has been called");
                 }
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
             @Override
             public void onPageSelected(int position) {
                 if (position == 3){
-                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.getItem(2);
+                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(2);
                     homefrag.transferInfo();
                 }
             }
@@ -85,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
     }
 
     @Override
-    public void setData(double bill, int tip, int ppl) {
+    public void setData(double bill, double tip, int ppl) {
         Tab3Summary summaryfrag = (Tab3Summary) mSectionsPagerAdapter.getItem(2);
         summaryfrag.updateInfo(bill, tip, ppl);
 
@@ -105,13 +109,26 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    Tab1Settings tab1 = new Tab1Settings();
+                    tab1 = new Tab1Settings();
                     return tab1;
                 case 1:
-                    Tab2Home tab2 = new Tab2Home();
+                    tab2 = new Tab2Home();
                     return tab2;
                 case 2:
-                    Tab3Summary tab3 = new Tab3Summary();
+                    tab3 = new Tab3Summary();
+                    return tab3;
+                default:
+                    return null;
+            }
+        }
+
+        public Fragment findItem(int position) {
+            switch (position){
+                case 0:
+                    return tab1;
+                case 1:
+                    return tab2;
+                case 2:
                     return tab3;
                 default:
                     return null;

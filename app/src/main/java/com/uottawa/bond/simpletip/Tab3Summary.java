@@ -36,8 +36,8 @@ public class Tab3Summary extends Fragment {
         System.out.println(billTotalTextV);
     }
 
-    public void updateInfo (double bill, int ppl, int tip){
-        double tipAmount = (((double)tip) / 100) * bill;
+    public void updateInfo (double bill, double tip, int ppl){
+        double tipAmount = tip * bill;
         double grandAmount = tipAmount + bill;
         billTotalTextV.setText(String.format("%.2f", bill));
         tipTextV.setText(String.format("%.2f", tipAmount));

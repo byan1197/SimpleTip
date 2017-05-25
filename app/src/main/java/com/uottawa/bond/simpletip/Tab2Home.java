@@ -118,20 +118,26 @@ public class Tab2Home extends Fragment {
     }
 
     public void transferInfo(){
-        double bill;
+        double bill, percentage;
         if (billAmount==null || String.valueOf(billAmount.getText())=="0")
             bill = 0.00;
         else
             bill = Double.parseDouble(String.valueOf(billAmount.getText()));
-        odsl.setData(
-                bill,
-                Integer.parseInt(String.valueOf(spinner.getSelectedItem())),
-                Integer.parseInt(String.valueOf(numPeopleEdit.getText())));
+
+        if (spinner.getSelectedItemPosition()==0)
+            percentage = (serviceRate.getNumStars() * 2 + 10)/100;
+        else
+            percentage = Double.parseDouble(String.valueOf(spinner.getSelectedItem()))/100;
+
+                    odsl.setData(
+                            bill,
+                            percentage,
+                            Integer.parseInt(String.valueOf(numPeopleEdit.getText())));
         System.out.println("info is transferring.");
     }
 
     public interface OnDataSetListener {
-        public void setData(double bill, int tip, int ppl);
+        public void setData(double bill, double tip, int ppl);
     }
 
     @Override
