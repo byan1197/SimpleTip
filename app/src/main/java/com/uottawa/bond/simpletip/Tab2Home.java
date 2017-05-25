@@ -18,6 +18,8 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -29,7 +31,7 @@ public class Tab2Home extends Fragment {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     EditText numPeopleEdit, billAmount;
-    TextView tipPrompt, servicePrompt;
+    TextView tipPrompt, servicePrompt, curTextView,percentTextView;
     Button addPpl, subPpl;
     int numPpl;
     RatingBar serviceRate;
@@ -38,17 +40,26 @@ public class Tab2Home extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        System.out.println("view created");
         View rootView = inflater.inflate(R.layout.tab2home, container, false);
 
+        //Spinner and adapter
         spinner = (Spinner)rootView.findViewById(R.id.tipSpinner);
         adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.tipArray, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        //views
         serviceRate=(RatingBar) rootView.findViewById(R.id.serviceBar);
         tipPrompt = (TextView) rootView.findViewById(R.id.tipSuggestPrompt);
         servicePrompt = (TextView) rootView.findViewById(R.id.serviceRatePrompt);
+        numPeopleEdit = (EditText) rootView.findViewById(R.id.numPeople);
+        subPpl = (Button) rootView.findViewById(R.id.subPplBtn);
+        billAmount = (EditText)rootView.findViewById(R.id.billEditText);
+        addPpl = (Button) rootView.findViewById(R.id.addPplBtn);
+        curTextView = (TextView) rootView.findViewById(R.id.curText);
+        percentTextView = (TextView) rootView.findViewById(R.id.percent);
+
+        //listeners
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -56,11 +67,14 @@ public class Tab2Home extends Fragment {
                     serviceRate.setVisibility(View.VISIBLE);
                     tipPrompt.setVisibility(View.VISIBLE);
                     servicePrompt.setVisibility(View.VISIBLE);
+                    percentTextView.setVisibility(View.GONE);
                 }
                 else{
                     tipPrompt.setVisibility(View.GONE);
                     servicePrompt.setVisibility(View.GONE);
                     serviceRate.setVisibility(View.GONE);
+                    percentTextView.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -70,11 +84,7 @@ public class Tab2Home extends Fragment {
             }
         });
 
-        numPeopleEdit = (EditText) rootView.findViewById(R.id.numPeople);
 
-        billAmount = (EditText)rootView.findViewById(R.id.billEditText);
-
-        addPpl = (Button) rootView.findViewById(R.id.addPplBtn);
         addPpl.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 numPpl = Integer.parseInt(String.valueOf(numPeopleEdit.getText()));
@@ -83,57 +93,45 @@ public class Tab2Home extends Fragment {
             }
         });
 
-        subPpl = (Button) rootView.findViewById(R.id.subPplBtn);
         subPpl.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 numPpl = Integer.parseInt(String.valueOf(numPeopleEdit.getText()));
-                numPpl --;
+                if (numPpl > 1)
+                    numPpl--;
                 numPeopleEdit.setText(Integer.toString(numPpl));
             }
         });
 
         return rootView;
     }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        System.out.println("started");
+    public void setDefaults(int tipPos, int curPos){
+        spinner.setSelection(tipPos);
+        if (curPos ==0) {
+            curTextView.setText("$");
+        }
+        else if (curPos == 1) {
+            curTextView.setText("£");
+        }
+        else {
+            curTextView.setText("€");
+        }
     }
 
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        System.out.println("destroyed");
-    }
-    @Override
-    public void onStop(){
-        super.onStop();
-        System.out.println("stopped");
-    }
-    @Override
-    public void onPause(){
-        super.onPause();
-        System.out.println("paused");
+    public boolean noData(){
+        if (billAmount.getText() == null || String.valueOf(billAmount.getText()).isEmpty() || String.valueOf(billAmount.getText())== "")
+            return true;
+        return false;
     }
 
     public void transferInfo(){
         double bill, percentage;
-        if (billAmount==null || String.valueOf(billAmount.getText())=="0")
-            bill = 0.00;
-        else
-            bill = Double.parseDouble(String.valueOf(billAmount.getText()));
-
+        bill = Double.parseDouble(String.valueOf(billAmount.getText()));
         if (spinner.getSelectedItemPosition()==0)
-            percentage = (serviceRate.getNumStars() * 2 + 10)/100;
+            percentage = ((double)(serviceRate.getNumStars()) * 2.0 + 10.0)/100.0;
         else
             percentage = Double.parseDouble(String.valueOf(spinner.getSelectedItem()))/100;
 
-                    odsl.setData(
-                            bill,
-                            percentage,
-                            Integer.parseInt(String.valueOf(numPeopleEdit.getText())));
-        System.out.println("info is transferring.");
+        odsl.setData(bill, percentage, numPpl);
     }
 
     public interface OnDataSetListener {
@@ -143,7 +141,6 @@ public class Tab2Home extends Fragment {
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
-        System.out.println("attached");
         try {
             odsl = (OnDataSetListener) context;
         } catch (Exception e){}

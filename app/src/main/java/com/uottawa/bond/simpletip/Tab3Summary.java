@@ -37,18 +37,10 @@ public class Tab3Summary extends Fragment {
     }
 
     public void updateInfo (double bill, double tip, int ppl){
-        double tipAmount = tip * bill;
+        double tipAmount = (tip * bill) / (double)ppl;
         double grandAmount = tipAmount + bill;
-        billTotalTextV.setText(String.format("%.2f", bill));
-        tipTextV.setText(String.format("%.2f", tipAmount));
-        grandTotalTextV.setText(String.format("%.2f", grandAmount));
+        billTotalTextV.setText(String.format("$%.2f", bill));
+        tipTextV.setText(String.format("$%.2f", tipAmount));
+        grandTotalTextV.setText(String.format("$%.2f", grandAmount));
     }
-
-    /*public void onStart(){
-        super.onStart();
-        numPpl = 123;
-        billTotal.setText(Integer.toString(numPpl));
-        tip.setText("12345");
-        grandTotal.setText("54321");
-    }*/
 }

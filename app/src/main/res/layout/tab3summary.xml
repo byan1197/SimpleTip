@@ -18,9 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Summary"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textAlignment="center"
-            android:textAppearance="@android:style/TextAppearance.Material.Headline"
-            />
+            android:textStyle="normal|bold"
+            android:textAllCaps="true" />
 
         <Space
             android:layout_width="match_parent"
@@ -31,14 +32,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bill total:"
-            android:textAppearance="@android:style/TextAppearance.Material.Button"
-            />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textAlignment="center"
+            android:textStyle="normal|bold" />
+
 
         <TextView
             android:id="@+id/billTexttv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="viewEnd" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textAlignment="center" />
 
         <Space
             android:layout_width="match_parent"
@@ -48,15 +52,17 @@
             android:id="@+id/tipTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tip"
-            android:textAppearance="@android:style/TextAppearance.Material.Button"
-            />
+            android:text="Tip:"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textAlignment="center"
+            android:textStyle="normal|bold" />
 
         <TextView
             android:id="@+id/tipText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textAlignment="center" />
 
         <Space
             android:layout_width="match_parent"
@@ -67,15 +73,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Grand Total:"
-            android:textAppearance="@android:style/TextAppearance.Material.Button"
-            android:textStyle="bold" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textStyle="bold"
+            android:textAlignment="center" />
+
 
         <TextView
             android:id="@+id/grandText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
-            android:textStyle="bold" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:textStyle="bold"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,28 +1,21 @@
 package com.uottawa.bond.simpletip;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSetListener {
 
@@ -63,20 +56,38 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
         mViewPager.setCurrentItem(1);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            SharedPreferences sp = getApplicationContext().getSharedPreferences("defaultValues", getApplicationContext().MODE_PRIVATE);
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 2){
                     Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
-                    homefrag.transferInfo();
-                    System.out.println(".transferInfo() has been called");
+                    if (homefrag.noData()) {
+                        mViewPager.setCurrentItem(1);
+                        Toast.makeText(getApplicationContext(), "Insufficient data.",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        homefrag.transferInfo();
+                    }
+                }
+                else if (position == 1 && sp.getBoolean("changed", false)){
+                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
+                    homefrag.setDefaults(sp.getInt("tip", 0), sp.getInt("currency", 0));
+                    SharedPreferences.Editor e = sp.edit();
+                    e.putBoolean("changed", false);
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 3){
-                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(2);
-                    homefrag.transferInfo();
+                if (position == 2){
+                    Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
+                    if (homefrag.noData()) {
+                        mViewPager.setCurrentItem(1);
+                        Toast.makeText(getApplicationContext(), "Insufficient data.",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        homefrag.transferInfo();
+                    }
                 }
             }
 
@@ -90,9 +101,7 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
 
     @Override
     public void setData(double bill, double tip, int ppl) {
-        Tab3Summary summaryfrag = (Tab3Summary) mSectionsPagerAdapter.getItem(2);
-        summaryfrag.updateInfo(bill, tip, ppl);
-
+        tab3.updateInfo(bill, tip, ppl);
     }
 
     /**
