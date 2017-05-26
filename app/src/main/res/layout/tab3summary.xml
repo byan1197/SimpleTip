@@ -25,7 +25,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50px" />
+            android:layout_height="100px" />
 
         <TextView
             android:id="@+id/billTotal"
@@ -46,7 +46,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25px" />
+            android:layout_height="75px" />
 
         <TextView
             android:id="@+id/tipTotal"
@@ -66,7 +66,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25px" />
+            android:layout_height="75px" />
 
         <TextView
             android:id="@+id/grandTotal"

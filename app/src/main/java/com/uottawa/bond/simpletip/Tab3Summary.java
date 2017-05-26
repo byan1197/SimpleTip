@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -37,7 +36,10 @@ public class Tab3Summary extends Fragment {
     }
 
     public void updateInfo (double bill, double tip, int ppl){
-        double tipAmount = (tip * bill) / (double)ppl;
+        double dppl = ppl;
+        if (ppl <=0)
+            dppl = 1.0;
+        double tipAmount = (tip * bill) / dppl;
         double grandAmount = tipAmount + bill;
         billTotalTextV.setText(String.format("$%.2f", bill));
         tipTextV.setText(String.format("$%.2f", tipAmount));

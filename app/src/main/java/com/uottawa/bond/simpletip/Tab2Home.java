@@ -67,14 +67,13 @@ public class Tab2Home extends Fragment {
                     serviceRate.setVisibility(View.VISIBLE);
                     tipPrompt.setVisibility(View.VISIBLE);
                     servicePrompt.setVisibility(View.VISIBLE);
-                    percentTextView.setVisibility(View.GONE);
+                    percentTextView.setVisibility(View.INVISIBLE);
                 }
                 else{
                     tipPrompt.setVisibility(View.GONE);
                     servicePrompt.setVisibility(View.GONE);
                     serviceRate.setVisibility(View.GONE);
                     percentTextView.setVisibility(View.VISIBLE);
-
                 }
             }
 
@@ -98,6 +97,8 @@ public class Tab2Home extends Fragment {
                 numPpl = Integer.parseInt(String.valueOf(numPeopleEdit.getText()));
                 if (numPpl > 1)
                     numPpl--;
+                else
+                    numPpl = 1;
                 numPeopleEdit.setText(Integer.toString(numPpl));
             }
         });
