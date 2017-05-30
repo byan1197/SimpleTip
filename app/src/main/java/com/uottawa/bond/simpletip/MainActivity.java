@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
                     homefrag.setDefaults(sp.getInt("tip", 0), sp.getInt("currency", 0));
                     SharedPreferences.Editor e = sp.edit();
                     e.putBoolean("changed", false);
+                    e.apply();
                 }
             }
 

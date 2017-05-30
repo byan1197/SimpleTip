@@ -32,8 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bill total:"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textStyle="normal|bold" />
 
 
@@ -63,6 +63,35 @@
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textAlignment="center" />
+
+        <LinearLayout
+            android:id="@+id/tpp_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="75px" />
+
+            <TextView
+                android:id="@+id/tpp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Tip Per Person:"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tipPPText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

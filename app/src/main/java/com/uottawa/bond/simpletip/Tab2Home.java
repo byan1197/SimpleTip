@@ -128,7 +128,7 @@ public class Tab2Home extends Fragment {
         double bill, percentage;
         bill = Double.parseDouble(String.valueOf(billAmount.getText()));
         if (spinner.getSelectedItemPosition()==0)
-            percentage = ((double)(serviceRate.getNumStars()) * 2.0 + 10.0)/100.0;
+            percentage = ((double)(serviceRate.getRating()) * 2.0 + 10.0)/100.0;
         else
             percentage = Double.parseDouble(String.valueOf(spinner.getSelectedItem()))/100;
 

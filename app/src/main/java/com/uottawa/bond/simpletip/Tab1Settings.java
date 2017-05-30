@@ -44,6 +44,7 @@ public class Tab1Settings extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 editor.putInt("tip", position);
+                editor.apply();
                 editor.putBoolean("changed", true);
                 editor.apply();
             }
@@ -57,6 +58,7 @@ public class Tab1Settings extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 editor.putInt("currency", position);
+                editor.apply();
                 editor.putBoolean("changed", true);
                 editor.apply();
             }
