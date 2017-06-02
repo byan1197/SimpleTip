@@ -67,12 +67,14 @@ public class Tab2Home extends Fragment {
                     serviceRate.setVisibility(View.VISIBLE);
                     tipPrompt.setVisibility(View.VISIBLE);
                     servicePrompt.setVisibility(View.VISIBLE);
-                    percentTextView.setVisibility(View.INVISIBLE);
+                    percentTextView.setVisibility(View.VISIBLE);
+                    //percentTextView.setVisibility(View.INVISIBLE);
                 }
                 else{
                     tipPrompt.setVisibility(View.GONE);
                     servicePrompt.setVisibility(View.GONE);
                     serviceRate.setVisibility(View.GONE);
+                    percentTextView.setText("%");
                     percentTextView.setVisibility(View.VISIBLE);
                 }
             }
@@ -83,6 +85,12 @@ public class Tab2Home extends Fragment {
             }
         });
 
+        serviceRate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                percentTextView.setText(String.valueOf(serviceRate.getRating() * 2 + 10) +"%");
+            }
+        });
 
         addPpl.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

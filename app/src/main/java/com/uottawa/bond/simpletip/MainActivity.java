@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
                     Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
                     if (homefrag.noData()) {
                         mViewPager.setCurrentItem(1);
-                        Toast.makeText(getApplicationContext(), "Insufficient data.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Insufficient data. Missing \"Bill Amount\"",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         homefrag.transferInfo();
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
                     Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
                     if (homefrag.noData()) {
                         mViewPager.setCurrentItem(1);
-                        Toast.makeText(getApplicationContext(), "Insufficient data.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Insufficient data. Missing \"Bill Amount\"",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         homefrag.transferInfo();

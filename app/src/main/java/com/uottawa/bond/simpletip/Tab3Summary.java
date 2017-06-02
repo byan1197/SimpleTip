@@ -1,5 +1,6 @@
 package com.uottawa.bond.simpletip;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,12 +21,17 @@ public class Tab3Summary extends Fragment {
 
     TextView billTotalTextV, grandTotalTextV, tipTextV,tipPerPersonTextV;
     LinearLayout container;
+    SharedPreferences sp;
+    String currency;
+    int curPos;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab3summary, container, false);
+
+        sp = rootView.getContext().getSharedPreferences("defaultValues", rootView.getContext().MODE_PRIVATE);
 
         return rootView;
     }
@@ -53,12 +59,24 @@ public class Tab3Summary extends Fragment {
             container.setVisibility(VISIBLE);
 
 
+        curPos = sp.getInt("currency", 0);
+        if (curPos ==0) {
+            currency = "$";
+        }
+        else if (curPos == 1) {
+            currency = "£";
+        }
+        else {
+            currency = "€";
+        }
+
+
         double totalTipAmount =(tip * bill);
         double tipAmountPerPerson = (tip * bill) / dppl;
         double grandAmount = totalTipAmount + bill;
-        billTotalTextV.setText(String.format("$%.2f", bill));
-        tipTextV.setText(String.format("$%.2f", totalTipAmount));
-        tipPerPersonTextV.setText(String.format("$%.2f", tipAmountPerPerson));
-        grandTotalTextV.setText(String.format("$%.2f", grandAmount));
+        billTotalTextV.setText(String.format(currency+"%.2f", bill));
+        tipTextV.setText(String.format(currency+"%.2f", totalTipAmount));
+        tipPerPersonTextV.setText(String.format(currency+"%.2f", tipAmountPerPerson));
+        grandTotalTextV.setText(String.format(currency+"%.2f", grandAmount));
     }
 }
