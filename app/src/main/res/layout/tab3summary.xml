@@ -20,6 +20,7 @@
             android:text="Summary"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textAlignment="center"
+            android:textColor="#d4af37"
             android:textStyle="normal|bold"
             android:textAllCaps="true" />
 
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="Bill total:"
             android:textAlignment="center"
+            android:textColor="#d4af37"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textStyle="normal|bold" />
 
@@ -53,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tip:"
+            android:textColor="#d4af37"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textAlignment="center"
             android:textStyle="normal|bold" />
@@ -65,11 +68,31 @@
             android:textAlignment="center" />
 
         <LinearLayout
-            android:id="@+id/tpp_container"
-            android:layout_width="wrap_content"
+            android:id="@+id/perperson_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="75px" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bill Per Person:"
+                android:textAlignment="center"
+                android:textColor="#d4af37"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bppTextV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
             <Space
                 android:layout_width="match_parent"
@@ -79,6 +102,7 @@
                 android:id="@+id/tpp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="#d4af37"
                 android:text="Tip Per Person:"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
@@ -102,6 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Grand Total:"
+            android:textColor="#d4af37"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textStyle="bold"
             android:textAlignment="center" />

@@ -19,7 +19,7 @@ import static android.view.View.VISIBLE;
 
 public class Tab3Summary extends Fragment {
 
-    TextView billTotalTextV, grandTotalTextV, tipTextV,tipPerPersonTextV;
+    TextView billTotalTextV, grandTotalTextV, tipTextV,tipPerPersonTextV,billPerPersonTextV;
     LinearLayout container;
     SharedPreferences sp;
     String currency;
@@ -43,8 +43,8 @@ public class Tab3Summary extends Fragment {
         tipTextV = (TextView) view.findViewById(R.id.tipText);
         grandTotalTextV = (TextView) view.findViewById(R.id.grandText);
         tipPerPersonTextV = (TextView) view.findViewById(R.id.tipPPText);
-
-        container = (LinearLayout) view.findViewById(R.id.tpp_container);
+        billPerPersonTextV = (TextView) view.findViewById(R.id.bppTextV);
+        container = (LinearLayout) view.findViewById(R.id.perperson_container);
 
         System.out.println(billTotalTextV);
     }
@@ -74,9 +74,11 @@ public class Tab3Summary extends Fragment {
         double totalTipAmount =(tip * bill);
         double tipAmountPerPerson = (tip * bill) / dppl;
         double grandAmount = totalTipAmount + bill;
+        double billPerPerson = bill/dppl;
         billTotalTextV.setText(String.format(currency+"%.2f", bill));
         tipTextV.setText(String.format(currency+"%.2f", totalTipAmount));
         tipPerPersonTextV.setText(String.format(currency+"%.2f", tipAmountPerPerson));
         grandTotalTextV.setText(String.format(currency+"%.2f", grandAmount));
+        billPerPersonTextV.setText(String.format(currency+"%.2f", billPerPerson));
     }
 }

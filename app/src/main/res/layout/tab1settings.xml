@@ -25,6 +25,7 @@
                 android:text="Settings"
                 android:textAlignment="center"
                 android:textAllCaps="true"
+                android:textColor="#d4af37"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:textStyle="bold" />
 
@@ -52,7 +53,7 @@
                 android:id="@+id/defaultTip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="textStart"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_weight="1" />
 

@@ -29,7 +29,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textAppearance="@android:style/TextAppearance.Material.Display1"
-                android:textColor="@android:color/white"
+                android:textColor="#d4af37"
                 android:textSize="36sp"
                 android:textStyle="normal|bold"
                 android:typeface="normal" />
@@ -46,7 +46,7 @@
                 android:text="Bill amount:"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                android:textColor="@android:color/white"
+                android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="normal|bold" />
 
@@ -64,7 +64,7 @@
                     android:text="$"
                     android:textAlignment="center"
                     android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                    android:textColor="@android:color/white"
+                    android:textColor="#d4af37"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
                 android:text="Number of people:"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                android:textColor="@android:color/white"
+                android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="normal|bold" />
             <LinearLayout
@@ -105,6 +105,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textStyle="normal|bold"
+                    android:textColor="@color/colorAccent"
                     android:text="-" />
 
                 <EditText
@@ -123,6 +125,8 @@
                     android:id="@+id/addPplBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="normal|bold"
                     android:layout_weight="1"
                     android:text="+" />
             </LinearLayout>
@@ -138,22 +142,23 @@
                 android:text="Select Tip:"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                android:textColor="@android:color/white"
+                android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="normal|bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft= "100px"
+                android:paddingRight= "100px">
 
                 <Spinner
                     android:id="@+id/tipSpinner"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_weight="0.76"
                     android:textAlignment="textEnd"
                     android:textColor="@android:color/white" />
 
@@ -161,10 +166,10 @@
                     android:id="@+id/percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="0.71"
                     android:text="%"
-                    android:textColor="@android:color/white"
+                    android:textColor="#d4af37"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -208,7 +213,7 @@
                 android:text="Swipe right to calculate!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
+                android:textColor="#d4af37"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1"
                 android:id="@+id/textView4"
                 android:textAlignment="center"
