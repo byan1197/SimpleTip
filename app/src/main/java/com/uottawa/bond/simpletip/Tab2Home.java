@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,7 +33,7 @@ public class Tab2Home extends Fragment {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     EditText numPeopleEdit, billAmount;
-    TextView tipPrompt, servicePrompt, curTextView,percentTextView;
+    TextView tipPrompt, servicePrompt, curTextView,percentTextView, swipeTextV;
     Button addPpl, subPpl;
     int numPpl;
     RatingBar serviceRate;
@@ -59,6 +60,7 @@ public class Tab2Home extends Fragment {
         addPpl = (Button) rootView.findViewById(R.id.addPplBtn);
         curTextView = (TextView) rootView.findViewById(R.id.curText);
         percentTextView = (TextView) rootView.findViewById(R.id.percent);
+        swipeTextV = (TextView) rootView.findViewById(R.id.swipeTV);
 
         //Starting with default
         SharedPreferences sp = rootView.getContext().getSharedPreferences("defaultValues", rootView.getContext().MODE_PRIVATE);
@@ -74,7 +76,6 @@ public class Tab2Home extends Fragment {
         else {
             curTextView.setText("€");
         }
-
 
         //listeners
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -99,6 +100,14 @@ public class Tab2Home extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        swipeTextV.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                odsl.calculate();
+                return true;
             }
         });
 
@@ -162,6 +171,7 @@ public class Tab2Home extends Fragment {
 
     public interface OnDataSetListener {
         public void setData(double bill, double tip, int ppl);
+        public void calculate ();
     }
 
     @Override

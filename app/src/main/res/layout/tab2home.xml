@@ -210,12 +210,12 @@
                 android:layout_height="100px" />
 
             <TextView
-                android:text="Swipe right to calculate!"
+                android:text="Swipe right or click to calculate!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#d4af37"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1"
-                android:id="@+id/textView4"
+                android:id="@+id/swipeTV"
                 android:textAlignment="center"
                 android:textStyle="normal|bold" />
         </LinearLayout>

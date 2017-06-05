@@ -105,6 +105,11 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
         tab3.updateInfo(bill, tip, ppl);
     }
 
+    @Override
+    public void calculate() {
+        mViewPager.setCurrentItem(2);
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
