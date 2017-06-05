@@ -2,6 +2,7 @@ package com.uottawa.bond.simpletip;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.Rating;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -58,6 +59,22 @@ public class Tab2Home extends Fragment {
         addPpl = (Button) rootView.findViewById(R.id.addPplBtn);
         curTextView = (TextView) rootView.findViewById(R.id.curText);
         percentTextView = (TextView) rootView.findViewById(R.id.percent);
+
+        //Starting with default
+        SharedPreferences sp = rootView.getContext().getSharedPreferences("defaultValues", rootView.getContext().MODE_PRIVATE);
+        int savedTip = (sp.contains("tip")? sp.getInt("tip", 0): 0);
+        spinner.setSelection(savedTip);
+        int savedCur= (sp.contains("currency")? sp.getInt("currency", 0): 0);
+        if (savedCur ==0) {
+            curTextView.setText("$");
+        }
+        else if (savedCur == 1) {
+            curTextView.setText("£");
+        }
+        else {
+            curTextView.setText("€");
+        }
+
 
         //listeners
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

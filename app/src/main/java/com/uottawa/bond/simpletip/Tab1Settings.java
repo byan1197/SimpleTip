@@ -39,6 +39,12 @@ public class Tab1Settings extends Fragment {
         final SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean("changed", false);
 
+        int savedTip = (sp.contains("tip")? sp.getInt("tip", 0): 0);
+        defaultSpin.setSelection(savedTip);
+        int savedCur= (sp.contains("currency")? sp.getInt("currency", 0): 0);
+        curSpin.setSelection(savedCur);
+
+
         //listeners
         defaultSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
