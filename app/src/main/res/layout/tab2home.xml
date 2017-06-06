@@ -36,7 +36,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="150px" />
+                android:layout_height="120px" />
 
             <TextView
                 android:id="@+id/totalPrompt"
@@ -203,19 +203,18 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/serviceBar"
                 android:numStars="5"
+                android:paddingTop="50px"
                 android:layout_gravity="center"/>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="100px" />
-
             <TextView
-                android:text="Swipe right or click to calculate!"
+                android:text="Swipe right or click here to calculate!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#d4af37"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1"
                 android:id="@+id/swipeTV"
+                android:paddingTop="50px"
+                android:paddingBottom="50px"
                 android:textAlignment="center"
                 android:textStyle="normal|bold" />
         </LinearLayout>
