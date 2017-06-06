@@ -7,6 +7,7 @@ import android.media.Rating;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -62,6 +63,9 @@ public class Tab2Home extends Fragment {
         percentTextView = (TextView) rootView.findViewById(R.id.percent);
         swipeTextV = (TextView) rootView.findViewById(R.id.swipeTV);
 
+        //input filter for decimal places
+        billAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,2)});
+
         //Starting with default
         SharedPreferences sp = rootView.getContext().getSharedPreferences("defaultValues", rootView.getContext().MODE_PRIVATE);
         int savedTip = (sp.contains("tip")? sp.getInt("tip", 0): 0);
@@ -106,7 +110,9 @@ public class Tab2Home extends Fragment {
         swipeTextV.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                odsl.calculate();
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    odsl.calculate();
+                }
                 return true;
             }
         });
