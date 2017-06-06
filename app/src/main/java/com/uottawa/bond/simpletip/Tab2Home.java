@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,9 +34,10 @@ public class Tab2Home extends Fragment {
 
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
-    EditText numPeopleEdit, billAmount;
+    EditText numPeopleEdit, billAmount, tipInput;
     TextView tipPrompt, servicePrompt, curTextView,percentTextView, swipeTextV;
     Button addPpl, subPpl;
+    LinearLayout input;
     int numPpl;
     RatingBar serviceRate;
 
@@ -52,6 +54,7 @@ public class Tab2Home extends Fragment {
         spinner.setAdapter(adapter);
 
         //views
+        tipInput = (EditText) rootView.findViewById(R.id.tipInputEdit);
         serviceRate=(RatingBar) rootView.findViewById(R.id.serviceBar);
         tipPrompt = (TextView) rootView.findViewById(R.id.tipSuggestPrompt);
         servicePrompt = (TextView) rootView.findViewById(R.id.serviceRatePrompt);
@@ -62,15 +65,24 @@ public class Tab2Home extends Fragment {
         curTextView = (TextView) rootView.findViewById(R.id.curText);
         percentTextView = (TextView) rootView.findViewById(R.id.percent);
         swipeTextV = (TextView) rootView.findViewById(R.id.swipeTV);
+        input = (LinearLayout) rootView.findViewById(R.id.input_container);
+        input.setVisibility(View.GONE);
 
         //input filter for decimal places
         billAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,2)});
+        tipInput.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
 
         //Starting with default
         SharedPreferences sp = rootView.getContext().getSharedPreferences("defaultValues", rootView.getContext().MODE_PRIVATE);
         int savedTip = (sp.contains("tip")? sp.getInt("tip", 0): 0);
         spinner.setSelection(savedTip);
         int savedCur= (sp.contains("currency")? sp.getInt("currency", 0): 0);
+
+        //TODO
+        //Maybe take this out??????
+        final SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("changed", false);
+
         if (savedCur ==0) {
             curTextView.setText("$");
         }
@@ -91,6 +103,14 @@ public class Tab2Home extends Fragment {
                     servicePrompt.setVisibility(View.VISIBLE);
                     percentTextView.setVisibility(View.VISIBLE);
                     //percentTextView.setVisibility(View.INVISIBLE);
+                    input.setVisibility(View.GONE);
+                }
+                else if (position == 1){
+                    tipPrompt.setVisibility(View.GONE);
+                    servicePrompt.setVisibility(View.GONE);
+                    serviceRate.setVisibility(View.GONE);
+                    input.setVisibility(View.VISIBLE);
+                    percentTextView.setVisibility(View.INVISIBLE);
                 }
                 else{
                     tipPrompt.setVisibility(View.GONE);
@@ -98,6 +118,7 @@ public class Tab2Home extends Fragment {
                     serviceRate.setVisibility(View.GONE);
                     percentTextView.setText("%");
                     percentTextView.setVisibility(View.VISIBLE);
+                    input.setVisibility(View.GONE);
                 }
             }
 
@@ -158,10 +179,14 @@ public class Tab2Home extends Fragment {
         }
     }
 
-    public boolean noData(){
+    //TODO
+    //CHANGE FOR TOASTS
+    public int noData(){
         if (billAmount.getText() == null || String.valueOf(billAmount.getText()).isEmpty() || String.valueOf(billAmount.getText())== "")
-            return true;
-        return false;
+            return 0;
+        else if (tipInput.getText() == null || String.valueOf(tipInput.getText()).isEmpty() || String.valueOf(tipInput.getText())== "")
+            return 1;
+        return 2;
     }
 
     public void transferInfo(){
@@ -169,6 +194,8 @@ public class Tab2Home extends Fragment {
         bill = Double.parseDouble(String.valueOf(billAmount.getText()));
         if (spinner.getSelectedItemPosition()==0)
             percentage = ((double)(serviceRate.getRating()) * 2.0 + 10.0)/100.0;
+        else if (spinner.getSelectedItemPosition()==1)
+            percentage = (Double.parseDouble(String.valueOf(tipInput.getText())))/100.0;
         else
             percentage = Double.parseDouble(String.valueOf(spinner.getSelectedItem()))/100;
 

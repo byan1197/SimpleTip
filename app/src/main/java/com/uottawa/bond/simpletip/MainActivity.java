@@ -61,9 +61,13 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 2){
                     Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
-                    if (homefrag.noData()) {
+                    if (homefrag.noData()==0) {
                         mViewPager.setCurrentItem(1);
                         Toast.makeText(getApplicationContext(), "Insufficient data. Missing \"Bill Amount\"",Toast.LENGTH_SHORT).show();
+                    }
+                    else if (homefrag.noData()==1){
+                        mViewPager.setCurrentItem(1);
+                        Toast.makeText(getApplicationContext(), "Insufficient data. Missing \"Tip\"",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         homefrag.transferInfo();
@@ -82,9 +86,13 @@ public class MainActivity extends AppCompatActivity implements Tab2Home.OnDataSe
             public void onPageSelected(int position) {
                 if (position == 2){
                     Tab2Home homefrag = (Tab2Home) mSectionsPagerAdapter.findItem(1);
-                    if (homefrag.noData()) {
+                    if (homefrag.noData()==0) {
                         mViewPager.setCurrentItem(1);
                         Toast.makeText(getApplicationContext(), "Insufficient data. Missing \"Bill Amount\"",Toast.LENGTH_SHORT).show();
+                    }
+                    else if (homefrag.noData()==1){
+                        mViewPager.setCurrentItem(1);
+                        Toast.makeText(getApplicationContext(), "Insufficient data. Missing \"Tip\"",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         homefrag.transferInfo();
